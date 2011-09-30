@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+
+  <title>vikixiu/touch-event @ GitHub</title>
+
+  <style type="text/css">
+    body {
+      margin-top: 1.0em;
+      background-color: #2aa751;
+      font-family: Helvetica, Arial, FreeSans, san-serif;
+      color: #ffffff;
+    }
+    #container {
+      margin: 0 auto;
+      width: 700px;
+    }
+    h1 { font-size: 3.8em; color: #d558ae; margin-bottom: 3px; }
+    h1 .small { font-size: 0.4em; }
+    h1 a { text-decoration: none }
+    h2 { font-size: 1.5em; color: #d558ae; }
+    h3 { text-align: center; color: #d558ae; }
+    a { color: #d558ae; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .download { float: right; }
+    pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+    
+    #main{width:970px;height:483px; margin:auto}
+    #touchZoom,#touch{width:200px; height:200px; background:#eee; border:1px solid #ccc;color:#010101}
+  </style>
+</head>
+
+<body>
+  <a href="http://github.com/vikixiu/touch-event"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+
+<div id="main">
+	<div id="touch">
+    		touch : <span id="touchInfo"></span>
+    	</div>
+    
+      <div id="touchZoom">
+    		Zoom : <span id="zoomInfo"></span>
+    	</div>
+        
+    </div>
+
+
+  <div id="container">
+
+    <div class="download">
+      <a href="http://github.com/vikixiu/touch-event/zipball/master">
+        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
+      <a href="http://github.com/vikixiu/touch-event/tarball/master">
+        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+    </div>
+
+    <h1><a href="http://github.com/vikixiu/touch-event">touch-event</a>
+      <span class="small">by <a href="http://github.com/vikixiu">vikixiu</a></span></h1>
+
+    <div class="description">
+      
+    </div>
+
+    <h2>Authors</h2>
+<p>viki xiu (vicky.wu1220@gmail.com)
+<br/>
+<br/>      </p>
+<h2>Contact</h2>
+<p> (vicky.wu1220@gmail.com)
+<br/>      </p>
+
+
+    <h2>Download</h2>
+    <p>
+      You can download this project in either
+      <a href="http://github.com/vikixiu/touch-event/zipball/master">zip</a> or
+      <a href="http://github.com/vikixiu/touch-event/tarball/master">tar</a> formats.
+    </p>
+    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
+      by running:
+      <pre>$ git clone git://github.com/vikixiu/touch-event</pre>
+    </p>
+    
+    <div class="footer">
+      get the source code on GitHub : <a href="http://github.com/vikixiu/touch-event">vikixiu/touch-event</a>
+    </div>
+
+  </div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+		/**
+		 * onGestureEvent
+		 */
+		var zoom = document.getElementById("touchZoom");
+		zoom.ongesturechange = function(e){
+			//scale代表手势产生的缩放比例，小于1是缩小，大于1是放大，原始为1
+			var scale = e.scale;
+			//rotation代表旋转手势的角度，值区间[0,360]，正值顺时针旋转，负值逆时针
+			var angle = e.rotation;
+			$('#zoomInfo').text('scale:' + scale + ', angle' + angle);
+		};
+		
+		/**
+		 * onTouchEvent
+		 */
+		var touch = document.getElementById("touch");
+		//touchstart类似mousedown
+		touch.ontouchstart = function(e){
+		    //事件的touches属性是一个数组，其中一个元素代表同一时刻的一个触控点，从而可以通过touches获取多点触控的每个触控点
+		    //由于我们只有一点触控，所以直接指向[0]
+		    var touchM = e.touches[0];
+		    //获取当前触控点的坐标，等同于MouseEvent事件的clientX/clientY
+		    var x = touchM.clientX;
+		    var y = touchM.clientY;
+		    $('#touchInfo').text('x:' + x + ', y' + y);
+		};
+		//touchmove类似mousemove
+		touch.ontouchmove = function(e){
+		    //可为touchstart、touchmove事件加上preventDefault从而阻止触摸时浏览器的缩放、滚动条滚动等
+		    e.preventDefault();
+		};
+		//touchend类似mouseup
+		touch.ontouchup = function(e){
+		    //nothing to do
+		};
+		
+	});
+</script>
+  
+</body>
+</html>
