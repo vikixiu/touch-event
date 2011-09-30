@@ -27,6 +27,9 @@
     pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
+    
+    #main{width:970px;height:483px; margin:auto}
+    #touchZoom{width:200px; height:200px; background:#eee; border:1px solid #ccc}
   </style>
 </head>
 
@@ -68,13 +71,35 @@
       by running:
       <pre>$ git clone git://github.com/vikixiu/touch-event</pre>
     </p>
-aaaaaa
+    <div id="main">
+    
+      <div id="touchZoom">
+    		touch Zoom : <span id="zoomInfo"></span>
+    	</div>
+        
+    </div>
     <div class="footer">
       get the source code on GitHub : <a href="http://github.com/vikixiu/touch-event">vikixiu/touch-event</a>
     </div>
 
   </div>
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+		/**
+		 * onGestureEvent
+		 */
+		var zoom = document.getElementById("touchZoom");
+		zoom.ongesturechange = function(e){
+			//scale代表手势产生的缩放比例，小于1是缩小，大于1是放大，原始为1
+			var scale = e.scale;
+			//rotation代表旋转手势的角度，值区间[0,360]，正值顺时针旋转，负值逆时针
+			var angle = e.rotation;
+			$('#zoomInfo').text('scale:' + scale + ', angle' + angle);
+		};
+		
+	});
+</script>
   
 </body>
 </html>
