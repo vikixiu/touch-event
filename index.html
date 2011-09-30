@@ -129,7 +129,12 @@
 		    //获取当前触控点的坐标，等同于MouseEvent事件的clientX/clientY
 		    var x = touchM.clientX;
 		    var y = touchM.clientY;
-		    $('#touchInfo').text('x:' + x + ', y' + y);
+			
+			var touchM1 = e.touches[1];
+		    //获取当前触控点的坐标，等同于MouseEvent事件的clientX/clientY
+		    var x1 = touchM1.clientX;
+		    var y1 = touchM1.clientY;
+		    $('#touchInfo').html('<p>x:' + x + ', y' + y + '</p><p>x1:' + x1 + ', y1:' + y1 + '</p>');
 		};
 		//touchend类似mouseup
 		touch.ontouchup = function(e){
